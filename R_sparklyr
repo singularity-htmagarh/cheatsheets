@@ -1,0 +1,46 @@
+## DATABRICKS CONNECT
+Open your .Revnviron file: userthis::edit_r_environ()
+In the .Reviron file add your Databricks Host Url and Token (PAT):
+ DATABRICKS_HOST = [Your Host URL]
+ DATABRICKS_TOKEN = [Your PAT]
+
+Install Extension: install.packages("pysparklyr")
+Open Connection:
+sc <- spark_connect(
+  cluster_id = "[Your cluster's ID]".
+  method = "databricks_connect"
+  )
+
+## STANDALONE CLUSTER
+Instll RStudio Server on one of the existing nodes or a server in the same LAN
+Open a connection
+  spark_connect(master ="spark://host:port",
+                version = "3.2",
+                spark_home = [path to Spark])
+
+## YARN CLIENT
+1. Install Rstudio Server on an edge node
+2. Locate path to the clusters spark home directory, it normally is "/usr/lib/spark"
+3. Basic configuration example
+  conf <- spark_config()
+  conf$spark.executor.memory <- "300M"
+  conf$spark.executor.core <- 2
+  conf$spark.executor.instances <- 3
+4. Open a connection
+
+sc <- spark_connect(master = "yarn",
+            spark_home = "/usr/lib/spark/",
+            version = "2.1.0", config = conf)
+
+## YARN CLUSTER
+
+1. Make sure to have copies of the yarn-site.xml and hive-site.xml files in the RStudio Server
+2. Point envrionment variables to the correct paths
+Sys.setenv(JAVA_HOME="[Path]")
+Sys.setenv(SPARK_HOME="[Path]")
+Sys.setenv(YARN_CONF_DIR = "[Path]")
+3. Open a connection
+sc <- spark_connect(master = "yarn-cluster")
+
+## KUBERNETES
+
