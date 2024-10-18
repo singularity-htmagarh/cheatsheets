@@ -1,0 +1,16 @@
+## READ A FILE INTO SPARK
+Arguments that apply to all functions: sc, name, path, options = list(), repartition=(), memory = TRUE, overwrite =TRUE
+
+CSV spark_read_csv(header=TRUE, columns=NULL, infer_schema=TRUE, delimiter=",", quote ="\", escape="\\"
+charset="UT-8", null_value=NULL)
+JSON spark_read_json()
+PARQUET spark_read_parquet()
+TEXT spark_read_text()
+DELTA spark_read_delta()
+
+FROM A TABLE
+
+dplyr::tbl(scr,...) Creaes  a reference to the table without loading its data into memory
+dbplyr::in_catalog() - Enables a three part table address
+x <- tbl(sc, in_catalog("catalog","schema","table"))
+
