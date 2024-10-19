@@ -1,0 +1,12 @@
+## Adding new R Code for Transaction Purposes
+
+ggplot(data = <Data>) +
+  <Geom_Function>(mapping = aes(<Mapping>),
+  stat = <stat>,
+  position = <Position>) +
+<Coordinate_Function> +
+<Facet_Function> +
+<Scale_Function> +
+<Theme_Function>
+
+Data, a Geom Function, and Aes Mappings are required. 
