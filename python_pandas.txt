@@ -45,4 +45,23 @@ df.drop(columns = ['Length','Height']) # Drop Columns from DataFrame
 
 ## Subset Observations 
 df[df.Length > 7]
+## Remove duplicate rows (only considers columsn)
 df.drop_duplicates()
+# Randomly select fraction of rows
+df.sample(n-=10) # Randomly select n rows
+df.nlargest(n,'value')
+df.nsmallest(n, 'value') # Select and order bottom n entries
+df.head(n) # Select last n rows
+
+## Subset Variables
+df[['width','length','species']]
+df['width']
+df.filter(regex = 'regex') # Select columsn whose names matches regular expression regex
+
+## Using Query
+query() allows Boolean expressions for filtering rows.
+df.query('Length >7')
+df.query('Length >7 and Width <8')
+df.query('Name.str.startswith("abc")', engine="python")
+
+
