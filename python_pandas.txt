@@ -1,0 +1,67 @@
+## Creating Dataframes, commit changes
+
+df = pd.DataFrame(
+      {"a":[4,5,6],
+       "b":[7,8,9],
+       "c":[10,11,12]},
+  index = [1,2,3])
+
+df = pd.DataFrame(
+  [[4,7,10],
+   [5,8,11],
+   [6,9,12]],
+  index=[1,2,3],
+  columns=['a','b','c'])
+
+df = pd.DataFrame(
+  {"a":[4,5,6],
+   "b":[7,8,9],
+   "c":[10,11,12]},
+  index = pd.MultiIndex.from_tuples([
+    ('d',1),('d',2),
+    ('e',2)],names=['n','v']))
+
+df=(pd.melt(df)
+    .rename(columns={'variable':'var',
+                     'value':'val'})
+    .query('val>= 200')
+   )
+
+## Gather Columns in Rows
+pd.melt(df)
+# Append rows of DataFrames
+pd.concat([df1,df2])
+#Spead rows into columns 
+df.pivot(columns='var', values='val')
+#Append columns of DataFrames
+pd.concat([df1,df2], axis=1)
+
+df.sort_values('mpg')
+df.sort_values('mpg',ascending=False)
+df.rename(columns = {'y':'year'})
+df.sort_index() # Sort the index of a DataFrame
+df.reset_index() # Reset index of DataFrame to row numbres, moving index to columns
+df.drop(columns = ['Length','Height']) # Drop Columns from DataFrame
+
+## Subset Observations 
+df[df.Length > 7]
+## Remove duplicate rows (only considers columsn)
+df.drop_duplicates()
+# Randomly select fraction of rows
+df.sample(n-=10) # Randomly select n rows
+df.nlargest(n,'value')
+df.nsmallest(n, 'value') # Select and order bottom n entries
+df.head(n) # Select last n rows
+
+## Subset Variables
+df[['width','length','species']]
+df['width']
+df.filter(regex = 'regex') # Select columsn whose names matches regular expression regex
+
+## Using Query
+query() allows Boolean expressions for filtering rows.
+df.query('Length >7')
+df.query('Length >7 and Width <8')
+df.query('Name.str.startswith("abc")', engine="python")
+
+
