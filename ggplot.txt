@@ -10,3 +10,5 @@ ggplot(data = <Data>) +
 <Theme_Function>
 
 Data, a Geom Function, and Aes Mappings are required. 
+
+Adding a new Line of Code
